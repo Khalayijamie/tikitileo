@@ -79,7 +79,7 @@
           <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
           <li><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
           @else
-          <li><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
+          <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
           <li><a class="nav-link" href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout
