@@ -1,6 +1,140 @@
 @extends('layout')
 @section('content')
 
+<!-- ======= Search Bar Section ======= -->
+<section id="search-bar">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2>Find Your Next Event</h2>
+      <p>Search for events by date, location, or name.</p>
+    </div>
+    
+    <form id="search-form" action="#" method="get">
+      <div class="row">
+        <div class="col-lg-4 col-md-12 mb-3">
+          <input type="text" class="form-control" id="event-name" name="name" placeholder="Event Name">
+        </div>
+        <div class="col-lg-4 col-md-12 mb-3">
+          <input type="text" class="form-control" id="event-location" name="location" placeholder="Location">
+        </div>
+        <div class="col-lg-4 col-md-12 mb-3">
+          <input type="date" class="form-control" id="event-date" name="date" placeholder="Date">
+        </div>
+        <div class="col-lg-12 text-center">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section><!-- End Search Bar Section -->
+
+<!-- ======= Events Section ======= -->
+<section id="events">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2>Upcoming Events</h2>
+      <p>Explore our list of upcoming events and secure your tickets now!</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/img/events/event1.jpg" alt="Event 1" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Tech Innovators Conference</a></h3>
+            <p>Join industry innovators in the tech world for a day of insightful networking.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#tech-innovators" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/img/events/event2.jpg" alt="Event 2" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Health & Wellness Expo</a></h3>
+            <p>Discover the latest trends in health and wellness with workshops, product showcases, and expert talks.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#health-wellness" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/img/events/event3.jpg" alt="Event 3" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Art & Design Symposium</a></h3>
+            <p>Engage with top artists and designers as they share their creative processes and innovative projects.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#art-design" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="100">
+          <img src="assets/img/events/event4.jpg" alt="Event 4" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Business Leadership Summit</a></h3>
+            <p>Enhance your leadership skills with sessions from successful business leaders and entrepreneurs.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#business-leadership" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="200">
+          <img src="assets/img/events/event5.jpg" alt="Event 5" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Sustainable Living Workshop</a></h3>
+            <p>Learn about sustainable living practices through interactive workshops and expert advice.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#sustainable-living" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="event" data-aos="fade-up" data-aos-delay="300">
+          <img src="assets/img/events/event6.jpg" alt="Event 6" class="img-fluid">
+          <div class="details">
+            <h3><a href="event-details.html">Music & Entertainment Festival</a></h3>
+            <p>Experience live performances, workshops, and meet-and-greet sessions with your favorite artists.</p>
+            <div class="social">
+              <a href="event-details.html" class="btn btn-primary">More Info</a>
+              <a href="pricing.html#music-entertainment" class="btn btn-secondary">Pricing Options</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><!-- End Events Section -->
+
+
+    <!-- ======= Payment Plans Section ======= -->
+    <section id="payment-plans">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2>Flexible Payment Plans</h2>
+          <p>Choose a payment plan that works best for you and enjoy the events without financial stress.</p>
+        </div>
+        <!-- Add your payment plans content here -->
+      </div>
+    </section><!-- End Payment Plans Section -->
 
     <!-- ======= Speakers Section ======= -->
     <section id="speakers">
@@ -360,6 +494,7 @@
       </div>
 
     </section><!-- End Schedule Section -->
+    
 
     <!-- ======= Venue Section ======= -->
     <section id="venue">
