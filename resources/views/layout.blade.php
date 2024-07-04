@@ -53,8 +53,7 @@
         <ul>
           
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="{{ route('events.index') }}">Events</a></li>
-
+         <
 
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#events">Events</a></li>
@@ -63,11 +62,11 @@
           @guest
           <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
           <li><a class="nav-link" href="{{ route('register') }}">SignUp</a></li>
-          <li><a class="nav-link" href="{{ route('lockscreen') }}">Lock Screen
+          <li><a class="nav-link" href="{{ route('lockscreen') }}">Lock Screen</a></li>
             <i class=<i class="bi bi-lock"></i></a>
           </li>
           @else
-          <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+         
           <li><a class="nav-link" href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout
