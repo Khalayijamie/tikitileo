@@ -8,7 +8,7 @@
   <title>TikitiLeo - Your Ticket Booking Solution</title>
   <meta content="Book tickets for events and pay in installments" name="description">
   <meta content="ticket booking, installments, events" name="keywords">
-  
+
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -44,41 +44,39 @@
     <div class="container-fluid container-xxl d-flex align-items-center">
 
       <div id="logo" class="me-auto">
-        <h1><a href="">Tikiti<span>Leo</span></a></h1>
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <h1><a href="{{ route('home') }}">Tikiti<span>Leo</span></a></h1>
+        <!-- <a href="{{ route('home') }}" class="scrollto"><img src="{{ asset('assets/img/logo.png') }}" alt="" title=""></a> -->
       </div>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+          
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('events.index') }}">Events</a></li>
+
+
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#events">Events</a></li>
           <li><a class="nav-link scrollto" href="#payment-plans">Payment Plans</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           @guest
           <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-          <li><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
-          @else
-          <!-- User Profile Dropdown -->
-          <li class="dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-circle" width="30" height="30" alt="">
-              <span>{{ Auth::user()->name }}</span>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  Logout
-                </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-                </form>
-              </li>
-            </ul>
+          <li><a class="nav-link" href="{{ route('register') }}">SignUp</a></li>
+          <li><a class="nav-link" href="{{ route('lockscreen') }}">Lock Screen
+            <i class=<i class="bi bi-lock"></i></a>
           </li>
-          @endguest
+          @else
+          <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+          <li><a class="nav-link" href="{{ route('logout') }}"
+          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          Logout
+        </a>
+    </li>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+    @endguest
         </ul>
         <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       <!-- </nav> -->
@@ -120,6 +118,12 @@
     </section><!-- End About Section -->
 
     @yield('content')
+
+    <!-- ======= Events Section ======= -->
+
+<!-- End Events Section -->
+
+
 
     <footer id="footer">
     <div class="footer-top">
