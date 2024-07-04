@@ -44,8 +44,9 @@
             <h3><a href="event-details.html">Tech Innovators Conference</a></h3>
             <p>Join industry innovators in the tech world for a day of insightful networking.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#tech-innovators" class="btn btn-secondary">Pricing Options</a>
+              
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
+
             </div>
           </div>
         </div>
@@ -58,8 +59,8 @@
             <h3><a href="event-details.html">Health & Wellness Expo</a></h3>
             <p>Discover the latest trends in health and wellness with workshops, product showcases, and expert talks.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#health-wellness" class="btn btn-secondary">Pricing Options</a>
+             
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
             </div>
           </div>
         </div>
@@ -72,8 +73,8 @@
             <h3><a href="event-details.html">Art & Design Symposium</a></h3>
             <p>Engage with top artists and designers as they share their creative processes and innovative projects.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#art-design" class="btn btn-secondary">Pricing Options</a>
+             
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
             </div>
           </div>
         </div>
@@ -86,8 +87,8 @@
             <h3><a href="event-details.html">Business Leadership Summit</a></h3>
             <p>Enhance your leadership skills with sessions from successful business leaders and entrepreneurs.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#business-leadership" class="btn btn-secondary">Pricing Options</a>
+
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
             </div>
           </div>
         </div>
@@ -100,8 +101,8 @@
             <h3><a href="event-details.html">Sustainable Living Workshop</a></h3>
             <p>Learn about sustainable living practices through interactive workshops and expert advice.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#sustainable-living" class="btn btn-secondary">Pricing Options</a>
+              
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
             </div>
           </div>
         </div>
@@ -114,8 +115,8 @@
             <h3><a href="event-details.html">Music & Entertainment Festival</a></h3>
             <p>Experience live performances, workshops, and meet-and-greet sessions with your favorite artists.</p>
             <div class="social">
-              <a href="event-details.html" class="btn btn-primary">More Info</a>
-              <a href="pricing.html#music-entertainment" class="btn btn-secondary">Pricing Options</a>
+              
+              <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@
   <title>TikitiLeo - Your Ticket Booking Solution</title>
   <meta content="Book tickets for events and pay in installments" name="description">
   <meta content="ticket booking, installments, events" name="keywords">
-
+  
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
