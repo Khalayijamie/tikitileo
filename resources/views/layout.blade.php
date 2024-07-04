@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>TheEvent Bootstrap Template - Index</title>
+  <title>TIKITI LEO - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,13 +43,17 @@
 
       <div id="logo" class="me-auto">
         <!-- Uncomment below if you prefer to use a text logo -->
-        <h1><a href="{{ route('home') }}">Tikiti<span>Leo</span></a></h1>
-        <!-- <a href="{{ route('home') }}" class="scrollto"><img src="{{ asset('assets/img/logo.png') }}" alt="" title=""></a> -->
+        <h1><a href="">Tikiti<span>Leo</span></a></h1>
+        <!-- <a href="" class="scrollto"><img src="{{ asset('assets/img/logo.png') }}" alt="" title=""></a> -->
       </div>
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
+          
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('events.index') }}">Events</a></li>
+
+
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#speakers">Speakers</a></li>
           <li><a class="nav-link scrollto" href="#schedule">Schedule</a></li>
@@ -77,14 +81,20 @@
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           @guest
           <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-          <li><a class="nav-link" href="{{ route('register') }}">Sign Up</a></li>
+          <li><a class="nav-link" href="{{ route('register') }}">SignUp</a></li>
+          <li><a class="nav-link" href="{{ route('lockscreen') }}">Lock Screen
+            <i class=<i class="bi bi-lock"></i></a>
+          </li>
           @else
-          <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+          <!-- <li><a class="nav-link" href="">Home</a></li> -->
           <li><a class="nav-link" href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           Logout
         </a>
-    </li>
+        <li><a class="nav-link" href="{{ route('lockscreen') }}">Lock Screen
+            <i class=<i class="bi bi-lock"></i></a>
+          </li>
+    </li>   
     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
         @csrf
     </form>
@@ -132,6 +142,12 @@
     </section><!-- End About Section -->
 
     @yield('content')
+
+    <!-- ======= Events Section ======= -->
+
+<!-- End Events Section -->
+
+
 
     <footer id="footer">
     <div class="footer-top">
