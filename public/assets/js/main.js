@@ -231,3 +231,13 @@
   });
 
 })()
+
+document.getElementById('search-form').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  // Retrieve the search query
+  const query = document.getElementById('search-input').value;
+
+  // Redirect to the search results page with the query parameter
+  window.location.href = `/events/search?query=${encodeURIComponent(query)}`;
+});

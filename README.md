@@ -1,66 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# TikitiLeo: An Event Ticketing Web Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+This project aims to develop a web application that allows users to purchase event tickets using flexible payment options, including installment plans. The goal is to increase accessibility and affordability for students and individuals with limited financial resources, promoting inclusivity in event participation.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Project Setup / Installation Instructions
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Dependencies
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Laravel
+- PHP
+- MySQL
+- Git
+- Visual Studio Code
 
-## Learning Laravel
+### Installation Steps
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. **Clone the repository:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+   ```bash
+   git clone https://github.com/tatiana-omolleh/tikitileo.git
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2. **Install composer dependencies:**
 
-## Laravel Sponsors
+   ```bash
+   composer install
+3. **Copy the `.env.example` file to `.env`:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```bash
+   cp .env.example .env
+4. **Generate an application key:**
 
-### Premium Partners
+   ```bash
+   php artisan key:generate
+5. **Set up your database in the `.env` file:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   Update the following lines with your database information:
 
-## Contributing
+   ```env
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_username
+   DB_PASSWORD=your_database_password
+6. **Run the database migrations:**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   php artisan migrate
+7. **Start the development server:**
 
-## Code of Conduct
+   ```bash
+   php artisan serve
+## Usage Instructions
+### How to Run
+1. **To run the web application, navigate to the project directory and start the development server using the following command:**
+   ```bash
+   php artisan serve
+   
+## Examples
+Open your web browser and go to [http://localhost:8000](http://localhost:8000).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Browse Events:** Users can browse events by category, location, and date.
+- **Purchase Tickets:** Users can purchase tickets using a single payment or choose an installment plan.
+- **Manage Installments:** Users will receive notifications and can view their payment progress through their account dashboard.
 
-## Security Vulnerabilities
+## Input/Output
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Input:** Users input event details, payment information, and installment preferences.
+- **Output:** The system generates tickets, payment confirmations, and installment notifications.
+## Project Structure
 
-## License
+### Overview
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **`app/`**: Contains the core application files and business logic.
+- **`database/`**: Contains migration files for database schema.
+- **`public/`**: Contains publicly accessible files like images and JavaScript.
+- **`resources/`**: Contains views, layouts, and other front-end assets.
+- **`routes/`**: Contains all route definitions.
+- **`tests/`**: Contains test cases for the application.
+
+## Key Files
+
+- **`app/Http/Controllers/`**: Contains controllers that handle the application logic.
+- **`app/Models/`**: Contains Eloquent models representing database tables.
+- **`resources/views/`**: Contains Blade templates for the front-end.
+- **`routes/web.php`**: Defines web routes for the application.
+
+## Additional Sections
+
+### Project Status
+
+The project is currently in progress.
+
+## Known Issues
+
+No known issues at the moment.
+
+## Acknowledgements
+
+- **[Laravel](https://laravel.com/)**
+- **[Visual Studio Code](https://code.visualstudio.com/)**
+- **[GitHub](https://github.com/)**
+
+## Contact Information
+
+For questions or feedback, please contact:
+
+- Email: [tatiana.omolleh@strathmore.edu](mailto:tatiana.omolleh@strathmore.edu)
+- Email: [jamie.nangulu@strathmore.edu](mailto:jamie.nangulu@strathmore.edu)
+

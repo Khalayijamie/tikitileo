@@ -26,8 +26,7 @@ Route::get('/', function () {
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
-Route::get('/lockscreen', [LockScreenController::class, 'showLockScreen'])->name('lockscreen');
-Route::view('/home','home')->middleware('auth','verified');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
