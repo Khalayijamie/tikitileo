@@ -66,15 +66,25 @@
             <i class=<i class="bi bi-lock"></i></a>
           </li>
           @else
-         
-          <li><a class="nav-link" href="{{ route('logout') }}"
-          onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          Logout
-        </a>
-    </li>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-        @csrf
-    </form>
+          <li class="dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-circle" width="30" height="30" alt="">
+              <span>{{ Auth::user()->name }}</span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  Logout
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </li>
+            </ul>
+          </li>
     @endguest
         </ul>
         <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->

@@ -22,6 +22,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'avatar',
     ];
 
     /**
@@ -43,4 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getProfilePhotoUrlAttribute()
+    {
+        return $this->avatar ? Storage::url($this->avatar) : 'assets/img/avatar.png';
+    }
 }
