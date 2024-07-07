@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,13 +22,31 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+            'user_type' => ['required', 'string', 'in:user,event_organizer'],
+        ]);
 
-        $request->session()->regenerate();
+        $credentials = $request->only('email', 'password');
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if ($request->user_type == 'user') {
+            // Attempt to log in as a regular user
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended(RouteServiceProvider::HOME);
+            }
+        } elseif ($request->user_type == 'event_organizer') {
+            // Attempt to log in as an event organizer
+            if (Auth::guard('event_organizer')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('event-organizer.dashboard'));
+            }
+        }
+
+        return back()->withErrors(['email' => 'Invalid credentials.']);
     }
 
     /**
@@ -38,9 +55,9 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
+        Auth::guard('event_organizer')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/login');

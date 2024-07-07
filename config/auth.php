@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'event_organizer' => [
+            'driver' => 'session',
+            'provider' => 'event_organizers',
+        ],
     ],
 
     /*
@@ -63,6 +67,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'event_organizers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\EventOrganizer::class,
         ],
 
         // 'users' => [

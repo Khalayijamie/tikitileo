@@ -29,7 +29,7 @@
 </section><!-- End Search Bar Section -->
 
 <!-- ======= Events Section ======= -->
-<section id="events">
+<!-- <section id="events">
   <div class="container" data-aos="fade-up">
     <div class="section-header">
       <h2>Upcoming Events</h2>
@@ -123,7 +123,39 @@
       </div>
     </div>
   </div>
-</section><!-- End Events Section -->
+</section> -->
+<!-- End Events Section -->
+<!-- ======= Events Section ======= -->
+<section id="events">
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <h2>Upcoming Events</h2>
+      <p>Explore our list of upcoming events and secure your tickets now!</p>
+    </div>
+
+    <div class="row">
+      @foreach($events as $event)
+        <div class="col-lg-4 col-md-6">
+          <div class="event" data-aos="fade-up" data-aos-delay="100">
+            <img src="{{ asset('assets/img/events' . $event->image) }}" alt="{{ $event->name }}" class="img-fluid">
+            <div class="details">
+              <h3><a href="#">{{ $event->name }}</a></h3>
+              <p>{{ $event->description }}</p>
+              <p><strong>Date:</strong> {{ $event->date }}</p>
+              <p><strong>Location:</strong> {{ $event->location }}</p>
+              <p><strong>Price:</strong> ${{ $event->price }}</p>
+              <p><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p>
+              <div class="social">
+                <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+<!-- End Events Section -->
 
 
     <!-- ======= Payment Plans Section ======= -->

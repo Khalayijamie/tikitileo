@@ -12,6 +12,8 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
+                        <input type="hidden" id="user_type" name="user_type" value="user">
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
@@ -54,8 +56,11 @@
 <br>
                         <div class="mb-0 form-group row">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" onclick="setUserType('user')">
                                     {{ __('Login') }}
+                                </button>
+                                <button type="submit" class="btn btn-secondary" onclick="setUserType('event_organizer')">
+                                    {{ __('Event Organizer') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -72,4 +77,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    function setUserType(type) {
+        document.getElementById('user_type').value = type;
+    }
+</script>
 @endsection
