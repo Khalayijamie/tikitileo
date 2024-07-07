@@ -14,8 +14,10 @@
             </header>
 
             <div class="mt-4 flex items-center">
-                <img src="{{ Auth::user()->profile_photo_url }}" class="rounded-full w-16 h-16 mr-4" alt="{{ Auth::user()->name }}">
-                <h3 class="text-xl font-medium text-gray-900 dark:text-gray-100">{{ Auth::user()->name }}</h3>
+                <div class="profile-photo-wrapper">
+                    <img src="{{ Auth::user()->profile_photo_url }}" class="profile-photo" alt="{{ Auth::user()->name }}">
+                </div>
+                <h3 class="text-xl font-medium text-gray-900 dark:text-gray-100 ml-4">{{ Auth::user()->name }}</h3>
             </div>
 
             <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -196,3 +198,18 @@
         </section>
     </div>
 @endsection
+
+<style>
+    .profile-photo-wrapper {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .profile-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>

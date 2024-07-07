@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File; 
 
 class ProfileController extends Controller
 {
@@ -55,16 +56,24 @@ class ProfileController extends Controller
         $user->address = $request->address;
 
         if ($request->hasFile('avatar')) {
-            if ($user->avatar) {
-                Storage::delete('public/' . $user->avatar);
+            // Delete the old avatar if it exists
+            if ($user->avatar && File::exists(public_path('assets/img/' . $user->avatar))) {
+                File::delete(public_path('assets/img/' . $user->avatar));
             }
-            $path = $request->file('avatar')->store('avatars', 'public');
-            $user->avatar = $path;
+
+            // Store the new avatar
+            $file = $request->file('avatar');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/img'), $filename);
+
+            // Update the user avatar path
+            $user->avatar = $filename;
         }
 
+        // Save other user data if necessary
         $user->save();
 
-        return redirect()->back()->with('status', 'profile-updated');
+        return redirect()->route('profile.edit')->with('success', 'Profile updated successfully.');
     }
 
     public function updatePassword(Request $request)

@@ -48,7 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function getProfilePhotoUrlAttribute()
-    {
-        return $this->avatar ? Storage::url($this->avatar) : 'assets/img/avatar.png';
-    }
+{
+    return $this->avatar ? asset('assets/img/' . $this->avatar) : asset('assets/img/avatar.png');
+}
+
 }
