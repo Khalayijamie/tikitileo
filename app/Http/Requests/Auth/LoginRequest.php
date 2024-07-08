@@ -29,6 +29,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'user_type' => ['required', 'string', 'in:user,event_organizer'],
         ];
     }
 
@@ -41,12 +42,24 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        $credentials = $this->only('email', 'password');
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
+        if ($this->user_type === 'user') {
+            if (! Auth::guard('web')->attempt($credentials, $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
+
+                throw ValidationException::withMessages([
+                    'email' => trans('auth.failed'),
+                ]);
+            }
+        } elseif ($this->user_type === 'event_organizer') {
+            if (! Auth::guard('event_organizer')->attempt($credentials, $this->boolean('remember'))) {
+                RateLimiter::hit($this->throttleKey());
+
+                throw ValidationException::withMessages([
+                    'email' => trans('auth.failed'),
+                ]);
+            }
         }
 
         RateLimiter::clear($this->throttleKey());

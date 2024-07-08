@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\EventOrganizerController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventBookingController;
+use App\Http\Controllers\PricingController;
 use App\Models\Event;
 
 /*
@@ -47,7 +48,7 @@ Route::post('/process-payment', [PaymentController::class, 'processPayment'])->n
 Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('register', [RegisteredUserController::class, 'store']);
 Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::post('login', [AuthenticatedSessionController::class, 'store'])->name('login');
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 // Profile Routes
@@ -75,5 +76,7 @@ Route::get('event-organizer/login', [AuthenticatedSessionController::class, 'cre
 Route::post('event-organizer/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('event-organizer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('event-organizer.logout');
 
+Route::get('/pricing', [PricingController::class, 'showPricing'])->name('pricing');
+Route::get('/installment-details/{eventId}/{installmentPlan}', [PricingController::class, 'showInstallmentDetails'])->name('installment.details');
 // Require additional auth routes
 // require __DIR__.'/auth.php';

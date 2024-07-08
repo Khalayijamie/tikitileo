@@ -1,12 +1,14 @@
 <?php
+// app/Http/Controllers/Auth/AuthenticatedSessionController.php
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -22,31 +24,19 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(LoginRequest $request): RedirectResponse
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-            'user_type' => ['required', 'string', 'in:user,event_organizer'],
-        ]);
+        $request->authenticate();
 
-        $credentials = $request->only('email', 'password');
+        $request->session()->regenerate();
 
-        if ($request->user_type == 'user') {
-            // Attempt to log in as a regular user
-            if (Auth::attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect()->intended(RouteServiceProvider::HOME);
-            }
-        } elseif ($request->user_type == 'event_organizer') {
-            // Attempt to log in as an event organizer
-            if (Auth::guard('event_organizer')->attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect()->intended(route('event-organizer.dashboard'));
-            }
+        if ($request->user_type === 'user') {
+            return redirect()->intended(route('home'));
+        } elseif ($request->user_type === 'event_organizer') {
+            return redirect()->intended(route('event-organizer.dashboard'));
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

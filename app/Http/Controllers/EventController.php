@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/Controllers/EventController.php
-
 namespace App\Http\Controllers;
 
 use App\Models\Event;
@@ -23,11 +21,26 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
+            'location' => 'required',
+            'price' => 'required|numeric',
+            'available_tickets' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $data = $request->all();
+
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('events', 'public');
+        } else {
+            $data['image'] = 'default.png';
         }
-        $event = Auth::user()->events()->create($data);
+
+        Auth::user()->events()->create($data);
+
         return redirect()->route('events.index');
     }
 
@@ -38,11 +51,24 @@ class EventController extends Controller
 
     public function update(Request $request, Event $event)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
+            'location' => 'required',
+            'price' => 'required|numeric',
+            'available_tickets' => 'required|integer',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
         $data = $request->all();
+
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('events', 'public');
         }
+
         $event->update($data);
+
         return redirect()->route('events.index');
     }
 

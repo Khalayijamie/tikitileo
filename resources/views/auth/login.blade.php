@@ -1,3 +1,5 @@
+<!-- resources/views/auth/login.blade.php -->
+
 @extends('layout')
 
 @section('content')
@@ -12,7 +14,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <input type="hidden" id="user_type" name="user_type" value="user">
+                        <input type="hidden" id="user_type" name="user_type" value="">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -27,7 +29,7 @@
                                 @enderror
                             </div>
                         </div>
-<br>
+                        <br>
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
@@ -41,7 +43,7 @@
                                 @enderror
                             </div>
                         </div>
-<br>
+                        <br>
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -53,14 +55,14 @@
                                 </div>
                             </div>
                         </div>
-<br>
+                        <br>
                         <div class="mb-0 form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary" onclick="setUserType('user')">
-                                    {{ __('Login') }}
+                                    {{ __('Login as User') }}
                                 </button>
                                 <button type="submit" class="btn btn-secondary" onclick="setUserType('event_organizer')">
-                                    {{ __('Event Organizer') }}
+                                    {{ __('Login as Event Organizer') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
