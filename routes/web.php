@@ -5,7 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstallmentController;
 use App\Http\Controllers\PaymentController;
-
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\EventOrganizerController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventBookingController;
+use App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,42 +22,58 @@ use App\Http\Controllers\PaymentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-//     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-// });
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
+Route::get('home', [HomeController::class, 'index'])->name('home');
+Route::get('about', [HomeController::class, 'about'])->name('about');
+Route::get('/pricing', function () {
+    return view('pricing');
+})->name('pricing');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/lockscreen', function () {
     return view('lockscreen');
 })->name('lockscreen');
 
 Route::get('/installment/details/{plan}', [InstallmentController::class, 'showInstallmentDetails'])->name('installment.details');
-
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment');
 Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process-payment');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-Route::get('/pricing', function () {
-    return view('pricing');
-})->name('pricing');
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('home', [HomeController::class, 'index'])->name('home');
-Route::get('about', [HomeController::class, 'about'])->name('about');
+// Auth Routes
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
+Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('login', [AuthenticatedSessionController::class, 'store']);
+Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+// Profile Routes
+Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Event Organizer Routes
+Route::middleware(['auth:event_organizer'])->group(function () {
+    Route::get('event-organizer/dashboard', [EventOrganizerController::class, 'dashboard'])->name('event-organizer.dashboard');
+    Route::resource('events', EventController::class);
+});
+
+// Event Booking Routes
+Route::get('events/{event}/book', [EventBookingController::class, 'showBookingForm'])->name('events.book');
+Route::post('events/{event}/book', [EventBookingController::class, 'processBooking'])->name('events.book.process');
+Route::get('events/{event}/book/success', function (Event $event) {
+    return view('booking-success', compact('event'));
+})->name('events.book.success');
+
+// Route to handle showing the login form for event organizers
+Route::get('event-organizer/login', [AuthenticatedSessionController::class, 'create'])->name('event-organizer.login');
+Route::post('event-organizer/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('event-organizer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('event-organizer.logout');
+
+// Require additional auth routes
 // require __DIR__.'/auth.php';

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -47,7 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function getProfilePhotoUrlAttribute()
-    {
-        return $this->avatar ? Storage::url($this->avatar) : 'assets/img/avatar.png';
-    }
+{
+    return $this->avatar ? asset('assets/img/' . $this->avatar) : asset('assets/img/avatar.png');
+}
+
 }

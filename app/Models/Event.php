@@ -1,5 +1,7 @@
 <?php
 
+// app/Models/Event.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -7,6 +9,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $fillable = ['name', 'description', 'date', 'location'];
+    use HasFactory;
 
+    protected $fillable = [
+        'name', 
+        'description', 
+        'date', 
+        'location', 
+        'event_organizer_id', 
+        'price', 
+        'available_tickets'
+    ];
+
+    public function organizer()
+    {
+        return $this->belongsTo(EventOrganizer::class, 'event_organizer_id');
+    }
+
+    public function paymentPlans()
+    {
+        return $this->hasMany(PaymentPlan::class);
+    }
 }
