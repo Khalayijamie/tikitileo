@@ -75,22 +75,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Pay on Delivery</h5>
-                    </div>
-                    <div class="card-body">
-                        <img src="{{ asset('images/delivery.png') }}" alt="Pay on Delivery" class="img-fluid mb-3">
-                        <p>You can pay for your order when it's delivered to your doorstep.</p>
-                        <form action="{{ route('process-payment') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="payment_method" value="cod">
-                            <button type="submit" class="btn btn-primary">Pay on Delivery</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
 @endsection
