@@ -84,6 +84,9 @@ Open your web browser and go to [http://localhost:8000](http://localhost:8000).
 - **`resources/views/`**: Contains Blade templates for the front-end.
 - **`routes/web.php`**: Defines web routes for the application.
 
+## License
+
+This project is licensed under the **[MIT license](https://opensource.org/license/MIT)**
 ## Additional Sections
 
 ### Project Status
