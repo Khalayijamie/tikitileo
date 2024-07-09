@@ -1,15 +1,21 @@
-<!-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot> -->
+@extends('layout')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+@section('content')
+    <div class="container mx-auto py-8">
+        <!-- Profile Information Update Form -->
+        <section style="padding: 20px; background: #f8f9fa; margin-bottom: 20px; border-radius: 10px;">
+            <header>
+                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100 text-center">
+                    {{ __('Profile Information') }}
+                </h2>
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 text-center">
+                    {{ __("Update your account's profile information and email address.") }}
+                </p>
+            </header>
+
+            <div class="mt-4 flex items-center">
+                <div class="profile-photo-wrapper">
+                    <img src="{{ Auth::user()->profile_photo_url }}" class="profile-photo" alt="{{ Auth::user()->name }}">
                 </div>
                 <h3 class="text-xl font-medium text-gray-900 dark:text-gray-100 ml-4">{{ Auth::user()->name }}</h3>
             </div>
@@ -195,8 +201,8 @@
 
 <style>
     .profile-photo-wrapper {
-        width: 100px;
-        height: 100px;
+        width: 40px;
+        height: 40px;
         overflow: hidden;
         border-radius: 50%;
     }

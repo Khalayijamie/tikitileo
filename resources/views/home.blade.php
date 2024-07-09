@@ -2,7 +2,7 @@
 @section('content')
 
 <!-- ======= Search Bar Section ======= -->
-<section id="search-bar">
+<!-- <section id="search-bar">
   <div class="container" data-aos="fade-up">
     <div class="section-header">
       <h2>Find Your Next Event</h2>
@@ -26,7 +26,8 @@
       </div>
     </form>
   </div>
-</section><!-- End Search Bar Section -->
+</section> -->
+<!-- End Search Bar Section -->
 
 <!-- ======= Events Section ======= -->
 <!-- <section id="events">
