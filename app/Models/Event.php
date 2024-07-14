@@ -12,13 +12,15 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
-        'description', 
-        'date', 
-        'location', 
-        'event_organizer_id', 
-        'price', 
-        'available_tickets'
+        'event_organizer_id',
+        'name',
+        'description',
+        'location',
+        'date',
+        'time',
+        'image',
+        'price',
+        'available_tickets',
     ];
 
     public function organizer()

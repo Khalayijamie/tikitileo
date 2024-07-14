@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->date('date')->default('2024-01-12');
             $table->time('time')->default('00:00:00');
-            $table->string('image')->default('default.jpg');
+            $table->string('image')->nullable();
             $table->decimal('price', 8, 2)->default(0);
             $table->integer('available_tickets')->default(0);
             $table->timestamps();

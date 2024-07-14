@@ -34,9 +34,7 @@ class EventController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('events', 'public');
-        } else {
-            $data['image'] = 'default.png';
+            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
         }
 
         Auth::user()->events()->create($data);
@@ -64,7 +62,7 @@ class EventController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('events', 'public');
+            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
         }
 
         $event->update($data);
