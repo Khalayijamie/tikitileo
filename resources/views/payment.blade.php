@@ -15,6 +15,7 @@
                         <form action="{{ route('process-payment') }}" method="POST">
                             @csrf
                             <input type="hidden" name="payment_method" value="paypal">
+                            <input type="hidden" name="amount" value="{{ $price }}">
                             <div class="form-group">
                                 <label for="paypal_email">PayPal Email</label>
                                 <input type="email" class="form-control" id="paypal_email" name="paypal_email" required>
@@ -35,6 +36,7 @@
                         <form action="{{ route('process-payment') }}" method="POST">
                             @csrf
                             <input type="hidden" name="payment_method" value="card">
+                            <input type="hidden" name="amount" value="{{ $price }}">
                             <div class="form-group">
                                 <label for="card_number">Card Number</label>
                                 <input type="text" class="form-control" id="card_number" name="card_number" required>
@@ -62,20 +64,25 @@
                     </div>
                     <div class="card-body">
                         <img src="assets/img/gallery/mpesa.png" alt="M-Pesa" class="img-fluid mb-3 img-thumbnail" style="max-width: 100px;">
-                        <form action="{{ route('process-payment') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="payment_method" value="mpesa">
-                            <div class="form-group">
-                                <label for="mpesa_number">M-Pesa Number</label>
-                                <input type="text" class="form-control" id="mpesa_number" name="mpesa_number" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Pay with M-Pesa</button>
-                        </form>
+                        <form action="{{ route('pay') }}" method="POST">
+    @csrf
+    <input type="hidden" name="amount" value="{{ $price }}">
+    <input type="hidden" name="payment_method" value="mpesa">
+    <div class="form-group">
+        <label for="mpesa_number">M-Pesa Number</label>
+        <input type="tel" class="form-control" id="mpesa_number" name="mpesa_number" pattern="[0-9]{9,12}" placeholder="Enter 9-12 digit phone number" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Pay with M-Pesa</button>
+</form>
+
+     
+
                     </div>
                 </div>
-            </div>
 
-           
+
+            </div>
         </div>
     </div>
 @endsection
+   

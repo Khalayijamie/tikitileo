@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class PaymentController extends Controller
 {
     /**
@@ -14,9 +15,11 @@ class PaymentController extends Controller
      */
     public function showPaymentForm(Request $request)
     {
-        $selectedInstallment = $request->query->get('installment');
+        $selectedInstallment = $request->query('installment');
 
-        return view('payment', compact('selectedInstallment'));
+        $price = $request->query('price');
+
+        return view('payment', compact('selectedInstallment', 'price'));
     }
 
     /**

@@ -38,7 +38,8 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{ route('payment') }}" class="btn btn-primary">One time payment</a>
+                        <a href="{{ route('payment', ['price' => $event->price]) }}" class="btn btn-primary">One time payment</a>
+
                         </td>
                     </tr>
                 @endforeach
