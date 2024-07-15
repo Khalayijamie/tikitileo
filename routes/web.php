@@ -12,6 +12,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventBookingController;
 use App\Http\Controllers\PricingController;
 use App\Models\Event;
+use App\Http\Controllers\MpesaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ use App\Models\Event;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
+Route::post('/pay', [App\Http\Controllers\MpesaController::class, 'stk'])->name('pay');
+
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
