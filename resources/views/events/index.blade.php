@@ -9,11 +9,13 @@
         @foreach($events as $event)
             <div class="col-md-4">
                 <div class="card mb-4">
-                    <img src="{{ asset('storage/' . $event->image) }}" class="card-img-top" alt="{{ $event->name }}">
+                    <img src="{{ asset('storage/assets/img/events/' . $event->image) }}" class="card-img-top" alt="{{ $event->name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $event->name }}</h5>
                         <p class="card-text">{{ $event->description }}</p>
                         <p class="card-text"><strong>Price:</strong> KES {{ $event->price }}</p>
+                        <p class="card-text"><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p>
+
                         <a href="{{ route('events.edit', $event) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('events.destroy', $event) }}" method="POST" class="d-inline">
                             @csrf

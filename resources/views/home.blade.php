@@ -138,14 +138,14 @@
       @foreach($events as $event)
         <div class="col-lg-4 col-md-6">
           <div class="event" data-aos="fade-up" data-aos-delay="100">
-          <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->name }}" class="img-fluid">
+            <img src="{{ asset('storage/assets/img/events/' . $event->image) }}" alt="{{ $event->name }}" class="img-fluid">
             <div class="details">
               <h3><a href="#">{{ $event->name }}</a></h3>
               <p>{{ $event->description }}</p>
               <p><strong>Date:</strong> {{ $event->date }}</p>
               <p><strong>Location:</strong> {{ $event->location }}</p>
               <p><strong>Price:</strong> KES {{ $event->price }}</p>
-              <p><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p>
+              <!-- <p><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p> -->
               <div class="social">
                 <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
               </div>
