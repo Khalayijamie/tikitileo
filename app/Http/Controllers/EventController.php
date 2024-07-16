@@ -28,6 +28,7 @@ class EventController extends Controller
             'location' => 'required',
             'price' => 'required|numeric',
             'available_tickets' => 'required|integer',
+            'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -58,6 +59,7 @@ class EventController extends Controller
             'location' => 'required',
             'price' => 'required|numeric',
             'available_tickets' => 'required|integer',
+            'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -78,5 +80,25 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->route('events.index');
+    }
+    public function search(Request $request)
+    {
+        $query = Event::query();
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('category')) {
+            $query->where('category', $request->input('category'));
+        }
+
+        if ($request->filled('date')) {
+            $query->whereDate('date', $request->input('date'));
+        }
+
+        $events = $query->get();
+
+        return view('events.search', compact('events'));
     }
 }

@@ -44,6 +44,8 @@ Route::get('/lockscreen', function () {
     return view('lockscreen');
 })->name('lockscreen');
 
+Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
+
 Route::get('/installment/details/{plan}', [InstallmentController::class, 'showInstallmentDetails'])->name('installment.details');
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment');
 Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process-payment');
