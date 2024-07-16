@@ -37,6 +37,19 @@
             <input type="number" name="available_tickets" id="available_tickets" class="form-control" value="{{ old('available_tickets', $event->available_tickets) }}" required>
         </div>
 
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" id="category" class="form-control" required>
+                <option value="entertainment" {{ $event->category == 'entertainment' ? 'selected' : '' }}>Entertainment</option>
+                <option value="education" {{ $event->category == 'education' ? 'selected' : '' }}>Education</option>
+                <option value="networking" {{ $event->category == 'networking' ? 'selected' : '' }}>Networking</option>
+                <option value="product_launch" {{ $event->category == 'product_launch' ? 'selected' : '' }}>Product Launch</option>
+                <option value="conference" {{ $event->category == 'conference' ? 'selected' : '' }}>Conference</option>
+                <option value="workshop" {{ $event->category == 'workshop' ? 'selected' : '' }}>Workshop</option>
+                <option value="charity" {{ $event->category == 'charity' ? 'selected' : '' }}>Charity</option>
+            </select>
+        </div>
+
         <div class="form-group mb-4">
             <label for="image">Event Image</label>
             <input type="file" name="image" id="image" class="form-control">

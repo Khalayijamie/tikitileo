@@ -28,6 +28,7 @@ class EventController extends Controller
             'location' => 'required',
             'price' => 'required|numeric',
             'available_tickets' => 'required|integer',
+            'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -66,6 +67,7 @@ class EventController extends Controller
             'location' => 'required',
             'price' => 'required|numeric',
             'available_tickets' => 'required|integer',
+            'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -89,9 +91,4 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('events.index');
     }
-    public function showInstallmentDetails(Event $event)
-{
-    return view('installmentdetails', compact('event'));
-}
-
 }

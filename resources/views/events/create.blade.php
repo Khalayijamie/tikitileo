@@ -29,7 +29,19 @@
             <label for="available_tickets">Available Tickets</label>
             <input type="number" name="available_tickets" class="form-control" required>
         </div>
-        <div class="form-group mb-4">
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" required>
+                <option value="entertainment">Entertainment</option>
+                <option value="education">Education</option>
+                <option value="networking">Networking</option>
+                <option value="product_launch">Product Launch</option>
+                <option value="conference">Conference</option>
+                <option value="workshop">Workshop</option>
+                <option value="charity">Charity</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="image">Event Image</label>
             <input type="file" name="image" class="form-control">
         </div>

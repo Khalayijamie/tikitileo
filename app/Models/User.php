@@ -57,4 +57,13 @@ public function events()
 {
     return $this->hasMany(Event::class, 'organizer_id');
 }
+public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function wishlist()
+    {
+        return $this->belongsToMany(Event::class, 'wishlists');
+    }
 }

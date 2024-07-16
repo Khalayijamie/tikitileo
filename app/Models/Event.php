@@ -22,10 +22,6 @@ class Event extends Model
         'price',
         'available_tickets',
         'status',
-        'installments_enabled',
-        'installment_count',
-        'installment_interval',
-        'installment_dates',
     ];
 
     public function organizer()
