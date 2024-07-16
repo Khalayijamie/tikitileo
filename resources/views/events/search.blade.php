@@ -63,7 +63,7 @@
                 <p><strong>Location:</strong> {{ $event->location }}</p>
                 <p><strong>Price:</strong> KES {{ $event->price }}</p>
                 <div class="social">
-                  <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
+                  <a href="{{ route('pricing') }}" class="btn btn-secondary">Buy Ticket</a>
                 </div>
               </div>
             </div>

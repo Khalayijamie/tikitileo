@@ -60,7 +60,7 @@
               <p><strong>Price:</strong> KES {{ $event->price }}</p>
               <!-- <p><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p> -->
               <div class="social">
-                <a href="{{ route('pricing') }}" class="btn btn-secondary">Pricing Options</a>
+                <a href="{{ route('pricing') }}" class="btn btn-secondary">Buy Ticket</a>
               </div>
             </div>
           </div>

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Safaricom\Mpesa\Mpesa;
+use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\PaymentReceived;
+use Illuminate\Support\Facades\Mail;
 
 class MpesaController extends Controller
 {
-    // Function to validate and sanitize the amount
     private function validateAmount($amount)
     {
         if (!is_numeric($amount) || $amount <= 0 || $amount > 70000) {
@@ -26,14 +29,11 @@ class MpesaController extends Controller
         $LipaNaMpesaPasskey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
         $TransactionType = 'CustomerPayBillOnline';
 
-        // Log the request data for debugging
         \Log::info('Request data: ', $request->all());
 
-        $Amount = '2000';
-
+        $Amount = '1';
         $PartyA = $phoneNumber;
-        $PartyB = '174379';
-        $PhoneNumber = $phoneNumber;
+        $PartyB = $BusinessShortCode;
         $CallBackURL = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
         $AccountReference = 'Account Reference';
         $TransactionDesc = 'Transaction Description';
@@ -46,7 +46,7 @@ class MpesaController extends Controller
             $Amount,
             $PartyA,
             $PartyB,
-            $PhoneNumber,
+            $phoneNumber,
             $CallBackURL,
             $AccountReference,
             $TransactionDesc,
@@ -54,9 +54,20 @@ class MpesaController extends Controller
         );
 
         \Log::info('STK Push Response: ' . json_encode($stkPushSimulation));
-        \Log::info('Amount being sent to M-Pesa: ' . $Amount);
-        \Log::info('M-Pesa phone number: ' . $PhoneNumber);
 
-        return response()->json($stkPushSimulation);
+        // Save the transaction in the database
+        $transaction = Transaction::create([
+            'user_id' => Auth::id(), // Store the user ID
+            'amount' => $Amount,
+            'mpesa_number' => $phoneNumber,
+            'status' => 'Pending',
+        ]);
+        // Calculate remaining installments and amount
+    $remainingInstallments = 3; // Example value
+    $remainingAmount = 6000; // Example value
+
+    // Send payment received email
+    Mail::to(Auth::user()->email)->send(new PaymentReceived($transaction, $remainingInstallments, $remainingAmount));
+    return redirect()->route('booking.success')->with('success', 'Payment initiated successfully! Please check your M-Pesa for confirmation.');
     }
 }

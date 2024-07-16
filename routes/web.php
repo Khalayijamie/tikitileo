@@ -44,6 +44,16 @@ Route::get('/lockscreen', function () {
     return view('lockscreen');
 })->name('lockscreen');
 
+Route::get('/booking/success', function () {
+    return view('booking-success');
+})->name('booking.success');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/my-purchases', [App\Http\Controllers\PurchaseController::class, 'index'])->name('my.purchases');
+});
+Route::post('/wishlist/add/{eventId}', [App\Http\Controllers\WishlistController::class, 'add'])->name('wishlist.add');
+Route::post('/wishlist/remove/{eventId}', [App\Http\Controllers\WishlistController::class, 'remove'])->name('wishlist.remove');
+
 Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
 
 Route::get('/installment/details/{plan}', [InstallmentController::class, 'showInstallmentDetails'])->name('installment.details');
