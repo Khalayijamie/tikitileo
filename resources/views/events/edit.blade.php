@@ -42,12 +42,14 @@
             <input type="file" name="image" id="image" class="form-control">
             @if($event->image)
                 <div class="mt-2">
-                    <img src="{{ asset('assets/img/events/' . $event->image) }}" alt="{{ $event->name }}" class="img-fluid" style="max-width: 200px;">
+                    <img src="{{ asset('storage/assets/img/events/' . $event->image) }}" alt="{{ $event->name }}" class="img-fluid" style="max-width: 200px;">
                 </div>
             @endif
         </div>
+        <br>
 
         <button type="submit" class="btn btn-primary">Update Event</button>
     </form>
 </div>
 @endsection
+<br>
