@@ -149,6 +149,19 @@ h6 {
   z-index: 997;
 }
 
+.btn-nude {
+  background-color: #E6BEAE;
+  border-color: #E6BEAE;
+  color: #333;
+}
+
+.btn-nude:hover {
+  background-color: #D1A696;
+  border-color: #D1A696;
+  color: #333;
+}
+
+
 #header.header-scrolled,
 #header.header-inner {
   background: rgba(6, 12, 34, 0.98);

@@ -29,7 +29,11 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function processPayment(Request $request)
-    {
+    {   
+        $validatedData = $request->validate([
+            // ... other validation rules
+            'accept_terms' => 'required|accepted',
+        ]);
         // Validate the payment form data
         $validatedData = $request->validate([
             'name' => 'required',
@@ -66,5 +70,23 @@ class PaymentController extends Controller
     {
         return view('payment.success');
     }
+    public function processInstallmentPayment(Request $request)
+{
+    // Validate the form data
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'phone' => 'required',
+        'installment_plan' => 'required',
+        'total_amount' => 'required|numeric',
+    ]);
+
+    // Process the payment and save the data
+    // Add your payment processing logic here
+
+    // Redirect to a success page or back to the installment details page with a success message
+    return redirect()->route('installment.details')->with('success', 'Your installment payment has been processed successfully.');
+}
+
 }
 

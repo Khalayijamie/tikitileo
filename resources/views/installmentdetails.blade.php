@@ -1,4 +1,5 @@
 @extends('layout')
+@include('installment-payment-form')
 
 @section('content')
     <div class="container">
@@ -15,7 +16,11 @@
                             <li>{{ $date }}</li>
                         @endforeach
                     </ul>
-                    <a href="{{ route('payment') }}" class="btn btn-primary">Proceed to Payment</a>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#installmentPaymentModal">
+    Proceed to Payment
+</button>
+
+
                 </div>
             </div>
         @else
@@ -23,3 +28,18 @@
         @endif
     </div>
 @endsection
+@include('terms-modal')
+
+<script>
+function showTermsModal() {
+    const termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+    termsModal.show();
+
+    document.getElementById('acceptTerms').onclick = function() {
+        document.getElementById('installmentPaymentForm').submit();
+    };
+}
+</script>
+
+
+
