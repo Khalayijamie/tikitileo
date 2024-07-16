@@ -32,13 +32,21 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
-            $data['image'] = $imageName;
+            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
         }
+
+        // Convert checkbox value to integer
+        $data['installments_enabled'] = $request->has('installments_enabled') ? 1 : 0;
+        $data['event_organizer_id'] = Auth::id();
+        $event = new Event();
+        $event->name = $request->input('name');
+        // ... other properties ...
+        $event->installment_dates = $request->input('installment_dates');
+        $event->save();
+        
 
         Auth::user()->events()->create($data);
 
@@ -63,13 +71,15 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->except('image');
+        $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $imageName = $request->file('image')->getClientOriginalName();
-            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
-            $data['image'] = $imageName;
+            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
         }
+
+        // Convert checkbox value to integer
+        $data['installments_enabled'] = $request->has('installments_enabled') ? 1 : 0;
+        $data['event_organizer_id'] = Auth::id();
 
         $event->update($data);
 
@@ -80,25 +90,5 @@ class EventController extends Controller
     {
         $event->delete();
         return redirect()->route('events.index');
-    }
-    public function search(Request $request)
-    {
-        $query = Event::query();
-
-        if ($request->filled('name')) {
-            $query->where('name', 'like', '%' . $request->input('name') . '%');
-        }
-
-        if ($request->filled('category')) {
-            $query->where('category', $request->input('category'));
-        }
-
-        if ($request->filled('date')) {
-            $query->whereDate('date', $request->input('date'));
-        }
-
-        $events = $query->get();
-
-        return view('events.search', compact('events'));
     }
 }

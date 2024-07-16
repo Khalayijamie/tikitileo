@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -29,9 +28,8 @@ use App\Http\Controllers\PurchaseController;
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-Route::post('/pay', [App\Http\Controllers\MpesaController::class, 'stk'])->name('pay');
+Route::post('/pay', [MpesaController::class, 'stk'])->name('pay');
 Route::post('/process-installment-payment', [PaymentController::class, 'processInstallmentPayment'])->name('process.installment.payment');
-
 
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
@@ -57,7 +55,7 @@ Route::post('/wishlist/remove/{eventId}', [App\Http\Controllers\WishlistControll
 
 Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
 
-Route::get('/installment/details/{plan}', [InstallmentController::class, 'showInstallmentDetails'])->name('installment.details');
+Route::get('/installment/details/{eventId}/{installmentPlan}', [InstallmentController::class, 'showInstallmentDetails'])->name('installment.details');
 Route::get('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment');
 Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process-payment');
 Route::post('/payment', [PaymentController::class, 'showPaymentForm'])->name('payment');
@@ -97,6 +95,6 @@ Route::post('event-organizer/logout', [AuthenticatedSessionController::class, 'd
 
 
 Route::get('/pricing', [PricingController::class, 'showPricing'])->name('pricing');
-Route::post('/installment-details/{eventId}/{installmentPlan}', [PricingController::class, 'showInstallmentDetails'])->name('installment.details');
+
 // Require additional auth routes
 // require __DIR__.'/auth.php';

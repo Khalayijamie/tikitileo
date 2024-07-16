@@ -14,10 +14,8 @@
                         <h5 class="card-title">{{ $event->name }}</h5>
                         <p class="card-text">{{ $event->description }}</p>
                         <p class="card-text"><strong>Price:</strong> KES {{ $event->price }}</p>
-                        <p class="card-text"><strong>Category:</strong> {{ $event->category }}</p>
                         <p class="card-text"><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p>
-                
-
+                        <p class="card-text"><strong>Category:</strong> {{ $event->category }}</p>
                         <a href="{{ route('events.edit', $event) }}" class="btn btn-primary">Edit</a>
                         <form action="{{ route('events.destroy', $event) }}" method="POST" class="d-inline">
                             @csrf

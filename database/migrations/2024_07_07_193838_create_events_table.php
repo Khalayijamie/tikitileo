@@ -1,37 +1,41 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->foreignId('event_organizer_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('description')->nullable();
+            $table->increments('id');
+            $table->unsignedBigInteger('event_organizer_id'); // Add the event organizer ID
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->dateTime('date_and_time')->nullable(); // Use appropriate data type for date and time
             $table->string('location')->nullable();
-            $table->date('date')->default('2024-01-12');
-            $table->time('time')->default('00:00:00');
-            $table->string('image')->nullable();
-            $table->decimal('price', 8, 2)->default(0);
-            $table->integer('available_tickets')->default(0);
+            $table->decimal('ticket_price', 8, 2)->nullable(); // Use decimal for price
+            $table->integer('available_tickets')->nullable(); // Use integer for tickets
+            $table->string('status')->nullable();
             $table->timestamps();
+
+            $table->foreign('event_organizer_id')->references('id')->on('users')->onDelete('cascade'); // Add foreign key constraint
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('events');
     }
-};
+}

@@ -1,33 +1,34 @@
 @extends('layout')
-@include('installment-payment-form')
-
+@include ('installment-payment-form')
 @section('content')
-    <div class="container">
-        <h1>Installment Details</h1>
-
-        @if ($installmentDetails)
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Total Amount: Ksh{{ $installmentDetails['totalAmount'] }}</h5>
-                    <p class="card-text">Installment Amount: Ksh{{ $installmentDetails['installmentAmount'] }}</p>
-                    <p class="card-text">Installment Dates:</p>
-                    <ul>
-                        @foreach ($installmentDetails['installmentDates'] as $date)
-                            <li>{{ $date }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#installmentPaymentModal">
-    Proceed to Payment
-</button>
-
-
-                </div>
-            </div>
+<div class="container">
+<h1>Installment Details for {{ $event->name }}</h1>
+    
+    <p>Event Date: {{ $event->date }}</p>
+    
+    @if ($installmentDetails)
+        <p>Total Amount: Ksh{{ $installmentDetails['totalAmount'] }}</p>
+        <p>Installment Amount: Ksh{{ $installmentDetails['installmentAmount'] }}</p>
+        <p>Installment Dates:</p>
+        <ul>
+        @if($installmentDetails['installmentDates'] && count($installmentDetails['installmentDates']) > 0)
+            @foreach ($installmentDetails['installmentDates'] as $date)
+                <li>{{ $date }}</li>
+            @endforeach
         @else
-            <p>Invalid installment plan selected.</p>
+            <p>No installment dates available.</p>
         @endif
-    </div>
+        </ul>
+        <form action="{{ $paymentRoute }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+        </form>
+    @else
+        <p>Invalid installment plan selected.</p>
+    @endif
+</div>
 @endsection
+
 @include('terms-modal')
 
 <script>
@@ -40,6 +41,3 @@ function showTermsModal() {
     };
 }
 </script>
-
-
-

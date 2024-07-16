@@ -22,7 +22,6 @@ class Event extends Model
         'price',
         'available_tickets',
         'status',
-        'category',
     ];
 
     public function organizer()
