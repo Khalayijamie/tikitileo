@@ -4,21 +4,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventOrganizer;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventOrganizerController extends Controller
 {
     public function dashboard()
-    {
-        $events = Auth::user()->events;
-        return view('event-organizer.dashboard', compact('events'));
-    }
-
-    public function showLoginForm()
-    {
-        return view('auth.event-organizer-login');
+    
+        {
+            // Fetch events for the authenticated event organizer
+            $events = Event::where('organizer_id', Auth::id())->get();
+    
+            // Pass events to the view
+            return view('event-organizer.dashboard', ['events' => $events]);
+        
     }
 
     public function login(Request $request)
@@ -34,7 +34,6 @@ class EventOrganizerController extends Controller
     public function logout()
     {
         Auth::guard('event_organizer')->logout();
-        return redirect()->route('event-organizer.login');
     }
 }
 

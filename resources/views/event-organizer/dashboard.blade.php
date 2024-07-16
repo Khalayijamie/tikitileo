@@ -1,10 +1,15 @@
 @extends('layout')
 
 @section('content')
-<div class="container">
-    <h1>Event Organizer Dashboard</h1>
-    <a href="{{ route('events.create') }}" class="btn btn-primary">Add New Event</a>
-    <h2>Your Events</h2>
+<h1>Event Organizer Dashboard</h1>
+
+<a href="{{ route('events.create') }}" class="btn btn-primary">Add New Event</a>
+
+<h2>Your Events</h2>
+
+@if ($events->isEmpty())
+    <p>No events found. <a href="{{ route('events.create') }}">Create an event</a>.</p>
+@else
     <table class="table">
         <thead>
             <tr>
@@ -18,23 +23,23 @@
         </thead>
         <tbody>
             @foreach ($events as $event)
-            <tr>
-                <td>{{ $event->name }}</td>
-                <td>{{ $event->description }}</td>
-                <td>{{ $event->location }}</td>
-                <td>{{ $event->price }}</td>
-                <td>{{ $event->available_tickets }}</td>
-                <td>
-                    <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Edit</a>
-                    <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ $event->name }}</td>
+                    <td>{{ $event->description }}</td>
+                    <td>{{ $event->location }}</td>
+                    <td>{{ $event->price }}</td>
+                    <td>{{ $event->available_tickets }}</td>
+                    <td>
+                        <a href="{{ route('events.edit', $event->id) }}" class="btn btn-warning">Edit</a>
+                        <form action="{{ route('events.destroy', $event->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
-</div>
+@endif
 @endsection

@@ -12,7 +12,7 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'event_organizer_id',
+        'organizer_id',
         'name',
         'description',
         'location',
@@ -21,11 +21,12 @@ class Event extends Model
         'image',
         'price',
         'available_tickets',
+        'status',
     ];
 
     public function organizer()
     {
-        return $this->belongsTo(EventOrganizer::class, 'event_organizer_id');
+        return $this->belongsTo(User::class, 'organizer_id');
     }
 
     public function paymentPlans()

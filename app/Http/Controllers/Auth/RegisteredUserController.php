@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Models\EventOrganizer;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -39,30 +38,23 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if ($request->has('is_event_organizer') && $request->is_event_organizer == 'on') {
-            $user = EventOrganizer::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        $role = $request->has('is_event_organizer') && $request->is_event_organizer == 'on' ? 'event_organizer' : 'user';
 
-            event(new Registered($user));
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $role,
+        ]);
 
-            Auth::guard('event_organizer')->login($user);
+        event(new Registered($user));
 
+        Auth::login($user);
+
+        if ($user->role === 'event_organizer') {
             return redirect()->route('event-organizer.dashboard');
-        } else {
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            event(new Registered($user));
-
-            Auth::login($user);
-
-            return redirect(RouteServiceProvider::HOME);
         }
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }

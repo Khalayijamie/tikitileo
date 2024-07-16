@@ -1,5 +1,3 @@
-<!-- resources/views/auth/login.blade.php -->
-
 @extends('layout')
 
 @section('content')
@@ -13,8 +11,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <input type="hidden" id="user_type" name="user_type" value="">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
@@ -45,6 +41,23 @@
                         </div>
                         <br>
                         <div class="form-group row">
+                            <label for="user_type" class="col-md-4 col-form-label text-md-right">{{ __('User Type') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="user_type" name="user_type" class="form-control" required>
+                                    <option value="user" {{ old('user_type') == 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="event_organizer" {{ old('user_type') == 'event_organizer' ? 'selected' : '' }}>Event Organizer</option>
+                                </select>
+
+                                @error('user_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -58,11 +71,8 @@
                         <br>
                         <div class="mb-0 form-group row">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" onclick="setUserType('user')">
-                                    {{ __('Login as User') }}
-                                </button>
-                                <button type="submit" class="btn btn-secondary" onclick="setUserType('event_organizer')">
-                                    {{ __('Login as Event Organizer') }}
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
@@ -79,10 +89,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function setUserType(type) {
-        document.getElementById('user_type').value = type;
-    }
-</script>
 @endsection

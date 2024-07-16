@@ -31,10 +31,12 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
+            $imageName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
+            $data['image'] = $imageName;
         }
 
         Auth::user()->events()->create($data);
@@ -59,10 +61,12 @@ class EventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
+            $imageName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
+            $data['image'] = $imageName;
         }
 
         $event->update($data);

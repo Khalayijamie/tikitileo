@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'address',
         'avatar',
+        'role',
     ];
 
     /**
@@ -48,8 +49,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
     public function getProfilePhotoUrlAttribute()
-{
+    {
     return $this->avatar ? asset('assets/img/' . $this->avatar) : asset('assets/img/avatar.png');
 }
 
+public function events()
+{
+    return $this->hasMany(Event::class, 'organizer_id');
+}
 }

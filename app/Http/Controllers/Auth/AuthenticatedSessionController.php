@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/Auth/AuthenticatedSessionController.php
 
 namespace App\Http\Controllers\Auth;
 
@@ -13,39 +12,35 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
         return view('auth.login');
     }
 
-    /**
-     * Handle an incoming authentication request.
-     */
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        if ($request->user_type === 'user') {
-            return redirect()->intended(route('home'));
-        } elseif ($request->user_type === 'event_organizer') {
+        $user = Auth::user();
+
+        if ($user === null) {
+            return back()->withErrors([
+                'email' => 'Authentication failed. Please check your credentials and try again.',
+            ])->withInput($request->only('email'));
+        }
+
+        if ($user->role === 'event_organizer') {
             return redirect()->intended(route('event-organizer.dashboard'));
         }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->intended(route('home'));
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
-        Auth::guard('web')->logout();
-        Auth::guard('event_organizer')->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
