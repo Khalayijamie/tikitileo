@@ -31,6 +31,7 @@
                         <td>
                             <form id="installmentForm-{{ $event->id }}" action="{{ route('installment.details', [$event->id, 'installmentPlan' => 0]) }}" method="POST">
                                 @csrf
+                                <input type="hidden" name="event_id" value="{{ $event->id }}"> <!-- Include event_id -->
                                 <select id="installmentOptions-{{ $event->id }}" name="installmentPlan" class="form-control installmentOptions" onchange="updateFormAction({{ $event->id }}, this.value)">
                                     <option value="">Select Installment Option</option>
                                     <option value="2">2 Monthly Installments</option>

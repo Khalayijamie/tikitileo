@@ -13,6 +13,7 @@ use App\Http\Controllers\EventBookingController;
 use App\Http\Controllers\PricingController;
 use App\Models\Event;
 use App\Http\Controllers\MpesaController;
+use App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,8 @@ Route::get('events/{event}/book/success', function (Event $event) {
 Route::get('event-organizer/login', [AuthenticatedSessionController::class, 'create'])->name('event-organizer.login');
 Route::post('event-organizer/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('event-organizer/logout', [AuthenticatedSessionController::class, 'destroy'])->name('event-organizer.logout');
+
+
 
 Route::get('/pricing', [PricingController::class, 'showPricing'])->name('pricing');
 Route::post('/installment-details/{eventId}/{installmentPlan}', [PricingController::class, 'showInstallmentDetails'])->name('installment.details');

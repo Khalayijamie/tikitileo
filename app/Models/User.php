@@ -64,6 +64,6 @@ public function transactions()
 
     public function wishlist()
     {
-        return $this->belongsToMany(Event::class, 'wishlists');
+        return $this->belongsToMany(Event::class, 'wishlists', 'user_id', 'event_id');
     }
 }

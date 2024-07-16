@@ -21,6 +21,7 @@ class MpesaController extends Controller
 
     public function stk(Request $request)
     {
+        $eventId = $request->event_id;
         $mpesa = new Mpesa();
         $phoneNumber = $request->input('mpesa_number');
         $phoneNumber = '254' . substr($phoneNumber, -9);
@@ -58,6 +59,7 @@ class MpesaController extends Controller
         // Save the transaction in the database
         $transaction = Transaction::create([
             'user_id' => Auth::id(), // Store the user ID
+            'event_id' => $eventId,
             'amount' => $Amount,
             'mpesa_number' => $phoneNumber,
             'status' => 'Pending',

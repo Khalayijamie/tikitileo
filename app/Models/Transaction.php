@@ -11,9 +11,12 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
+        'event_id',
         'mpesa_number',
         'amount',
         'status',
+        'total_installments',
+        'paid_installments',
     ];
     
 

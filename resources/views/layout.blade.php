@@ -53,8 +53,6 @@
         <ul>
           
           <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-         <
-
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#events">Events</a></li>
           <li><a class="nav-link scrollto" href="#payment-plans">Payment Plans</a></li>
@@ -73,6 +71,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+              <li><a class="dropdown-item" href="{{ route('my.purchases') }}">My Purchases</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <a class="dropdown-item" href="{{ route('logout') }}"

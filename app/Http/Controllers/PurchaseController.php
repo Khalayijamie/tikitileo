@@ -13,11 +13,13 @@ class PurchaseController extends Controller
     {
         $user = Auth::user();
 
-        $previousPurchases = Transaction::where('user_id', $user->id)
+        $previousPurchases = Transaction::with('event')
+            ->where('user_id', $user->id)
             ->where('status', 'Completed')
             ->get();
 
-        $ongoingPayments = Transaction::where('user_id', $user->id)
+        $ongoingPayments = Transaction::with('event')
+            ->where('user_id', $user->id)
             ->where('status', 'Pending')
             ->get();
 
