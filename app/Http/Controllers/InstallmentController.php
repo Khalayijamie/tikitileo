@@ -16,6 +16,7 @@ class InstallmentController extends Controller
                     'totalAmount' => 4000, // Example total amount for 2 monthly installments
                     'installmentAmount' => 2000, // Example installment amount
                     'installmentDates' => ['2023-06-01', '2023-07-01'], // Example installment dates
+                    'plan' => $plan 
                 ];
                 break;
             case '3-months':
@@ -24,6 +25,7 @@ class InstallmentController extends Controller
                     'totalAmount' => 4000, // Example total amount for 3 monthly installments
                     'installmentAmount' => 1333, // Example installment amount
                     'installmentDates' => ['2023-06-01', '2023-07-01', '2023-08-01'], // Example installment dates
+                    'plan' => $plan 
                 ];
                 break;
             case '6-months':
@@ -32,6 +34,7 @@ class InstallmentController extends Controller
                     'totalAmount' => 4000, // Example total amount for 6 monthly installments
                     'installmentAmount' => 666, // Example installment amount
                     'installmentDates' => ['2023-06-01', '2023-07-01', '2023-08-01', '2023-09-01', '2023-10-01', '2023-11-01'], // Example installment dates
+                    'plan' => $plan 
                 ];
                 break;
             default:
@@ -40,6 +43,7 @@ class InstallmentController extends Controller
                 break;
         }
 
-        return view('installmentdetails', compact('installmentDetails'));
+        return view('installmentdetails', compact('installmentDetails', 'paymentRoute'));
+
     }
 }

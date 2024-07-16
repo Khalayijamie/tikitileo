@@ -1,5 +1,8 @@
 @extends('layout')
 
+@include('terms-modal')
+
+
 @section('content')
     <div class="container">
         <h1>Pricing Plans</h1>
@@ -26,7 +29,7 @@
                             </ul>
                         </td>
                         <td>
-                            <form id="installmentForm-{{ $event->id }}" action="{{ route('installment.details', [$event->id, 'installmentPlan' => 0]) }}" method="GET">
+                            <form id="installmentForm-{{ $event->id }}" action="{{ route('installment.details', [$event->id, 'installmentPlan' => 0]) }}" method="POST">
                                 <select id="installmentOptions-{{ $event->id }}" name="installmentPlan" class="form-control installmentOptions" onchange="updateFormAction({{ $event->id }}, this.value)">
                                     <option value="">Select Installment Option</option>
                                     <option value="2">2 Monthly Installments</option>
@@ -38,7 +41,9 @@
                             </form>
                         </td>
                         <td>
-                        <a href="{{ route('payment', ['price' => $event->price]) }}" class="btn btn-primary">One time payment</a>
+                        <a href="#" class="btn btn-nude" onclick="showTermsModal({{ $event->id }}, {{ $event->price }})">One time payment</a>
+
+
 
                         </td>
                     </tr>
@@ -67,5 +72,17 @@
             const form = document.getElementById(`installmentForm-${eventId}`);
             form.submit();
         }
+
+        function showTermsModal(eventId, price) {
+    // Show the terms modal
+    const termsModal = new bootstrap.Modal(document.getElementById('termsModal'));
+    termsModal.show();
+
+    // Update the accept button to redirect to payment page when clicked
+    document.getElementById('acceptTerms').onclick = function() {
+        window.location.href = "{{ route('payment') }}?price=" + price;
+    };
+}
+
     </script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<section id="booking">
+ <section id="booking">
     <div class="container">
         <div class="section-header">
             <h2>Book Event</h2>
