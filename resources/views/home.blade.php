@@ -69,13 +69,16 @@
     </div>
 @endif
 <div class="button-group mt-3">
-    <a href="{{ route('installment.details', ['eventId' => $event->id, 'installmentPlan' => $event->installment_count ?? 1]) }}" class="btn btn-soft-pink rounded-pill shadow-sm me-2 px-4 py-2">
-        <i class="fas fa-calendar-alt me-1"></i> Installments
-    </a>
+    @if($event->installments_enabled)
+        <a href="{{ route('installment.details', ['eventId' => $event->id, 'installmentPlan' => $event->installment_count ?? 1]) }}" class="btn btn-soft-pink rounded-pill shadow-sm me-2 px-4 py-2">
+            <i class="fas fa-calendar-alt me-1"></i> Installments
+        </a>
+    @endif
     <a href="{{ route('payment', ['eventId' => $event->id]) }}" class="btn btn-soft-peach rounded-pill shadow-sm px-4 py-2">
         <i class="fas fa-money-bill-wave me-1"></i> Pay Now
     </a>
 </div>
+
 
 
 
