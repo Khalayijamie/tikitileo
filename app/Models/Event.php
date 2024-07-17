@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Event.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,17 +10,9 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        'organizer_id',
-        'name',
-        'description',
-        'location',
-        'date',
-        'time',
-        'image',
-        'price',
-        'available_tickets',
-        'status',
-        'category',
+        'name', 'description', 'category', 'location', 'date', 'time', 'image', 'price', 
+        'available_tickets', 'organizer_id', 'installments_enabled', 'installment_count', 
+        'installment_dates'
     ];
 
     public function organizer()

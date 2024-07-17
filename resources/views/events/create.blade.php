@@ -18,6 +18,10 @@
             <input type="date" name="date" id="event_date" class="form-control" required>
         </div>
         <div class="form-group mb-4">
+            <label for="time">Time</label>
+            <input type="time" name="time" class="form-control" required>
+        </div>
+        <div class="form-group mb-4">
             <label for="location">Location</label>
             <input type="text" name="location" class="form-control" required>
         </div>

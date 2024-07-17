@@ -23,6 +23,11 @@
         </div>
 
         <div class="form-group mb-4">
+            <label for="time">Time</label>
+            <input type="time" name="time" id="time" class="form-control" value="{{ old('time', $event->time) }}" required>
+        </div>
+
+        <div class="form-group mb-4">
             <label for="location">Location</label>
             <input type="text" name="location" id="location" class="form-control" value="{{ old('location', $event->location) }}" required>
         </div>
@@ -68,11 +73,11 @@
         <div id="installment_options" style="display: {{ $event->installments_enabled ? 'block' : 'none' }};">
             <div class="form-group mb-4">
                 <label for="installment_count">Number of Installments</label>
-                <input type="number" name="installment_count" id="installment_count" class="form-control" min="2" max="12" value="{{ $event->installment_count }}">
+                <input type="number" name="installment_count" id="installment_count" class="form-control" min="2" max="12" value="{{ old('installment_count', $event->installment_count) }}">
             </div>
             <div class="form-group mb-4">
                 <label for="installment_interval">Interval between Installments (in days)</label>
-                <input type="number" name="installment_interval" id="installment_interval" class="form-control" min="1" value="{{ $event->installment_interval }}">
+                <input type="number" name="installment_interval" id="installment_interval" class="form-control" min="1" value="{{ old('installment_interval', $event->installment_interval) }}">
             </div>
         </div>
 

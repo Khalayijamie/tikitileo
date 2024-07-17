@@ -98,6 +98,8 @@ Route::get('/pricing', [PricingController::class, 'showPricing'])->name('pricing
 Route::get('/complete-payment/{transactionId}', [MpesaController::class, 'completePayment'])->name('complete.payment');
 Route::get('/ticket/{transactionId}', [MpesaController::class, 'viewTicket'])->name('view.ticket');
 
+Route::resource('events', EventController::class);
+
 // Route::post('/pay', [MpesaController::class, 'stk'])->name('pay');
 // Route::get('/payment', [MpesaController::class, 'stk'])->name('payment');
 // Require additional auth routes
