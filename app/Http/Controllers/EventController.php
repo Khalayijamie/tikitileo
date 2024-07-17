@@ -31,24 +31,22 @@ class EventController extends Controller
             'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $data = $request->all();
+        $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
+            $imageName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
+            $data['image'] = $imageName;
         }
 
         // Convert checkbox value to integer
         $data['installments_enabled'] = $request->has('installments_enabled') ? 1 : 0;
         $data['event_organizer_id'] = Auth::id();
-        $event = new Event();
-        $event->name = $request->input('name');
-        // ... other properties ...
-        $event->installment_dates = $request->input('installment_dates');
-        $event->save();
-        
 
-        Auth::user()->events()->create($data);
+        $installmentDates = $request->input('installment_dates', []);
+        $data['installment_dates'] = json_encode($installmentDates);
+
+        $event = Event::create($data);
 
         return redirect()->route('events.index');
     }
@@ -70,16 +68,20 @@ class EventController extends Controller
             'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $data = $request->all();
+        $data = $request->except('image');
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->storeAs('assets/img/events', $request->file('image')->getClientOriginalName(), 'public');
+            $imageName = $request->file('image')->getClientOriginalName();
+            $request->file('image')->storeAs('assets/img/events', $imageName, 'public');
+            $data['image'] = $imageName;
         }
 
         // Convert checkbox value to integer
         $data['installments_enabled'] = $request->has('installments_enabled') ? 1 : 0;
         $data['event_organizer_id'] = Auth::id();
+
+        $installmentDates = $request->input('installment_dates', []);
+        $data['installment_dates'] = json_encode($installmentDates);
 
         $event->update($data);
 
@@ -91,6 +93,7 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('events.index');
     }
+
     public function search(Request $request)
     {
         $query = Event::query();

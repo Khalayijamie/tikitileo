@@ -18,12 +18,12 @@ class Transaction extends Model
         'total_installments',
         'paid_installments',
     ];
-    
 
     public function event()
     {
         return $this->belongsTo(Event::class);
     }
+
     public function user()
     {
         return $this->belongsTo(User::class);

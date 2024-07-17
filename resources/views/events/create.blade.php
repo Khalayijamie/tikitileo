@@ -29,7 +29,7 @@
             <label for="available_tickets">Available Tickets</label>
             <input type="number" name="available_tickets" class="form-control" required>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-4">
             <label for="category">Category</label>
             <select name="category" class="form-control" required>
                 <option value="entertainment">Entertainment</option>
@@ -41,16 +41,14 @@
                 <option value="charity">Charity</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group mb-4">
             <label for="image">Event Image</label>
             <input type="file" name="image" class="form-control">
         </div>
-
         <div class="form-group mb-4">
             <label for="installments_enabled">Enable Installments</label>
             <input type="checkbox" name="installments_enabled" id="installments_enabled" class="form-check-input">
         </div>
-
         <div id="installment_options" style="display: none;">
             <div class="form-group mb-4">
                 <label for="installment_count">Number of Installments</label>
@@ -89,7 +87,7 @@
             for (let i = 1; i <= count; i++) {
                 const dateInput = document.createElement('input');
                 dateInput.type = 'date';
-                dateInput.name = `installment_date_${i}`;
+                dateInput.name = `installment_dates[]`;
                 dateInput.className = 'form-control mt-2';
                 dateInput.value = currentDate.toISOString().split('T')[0];
                 container.appendChild(dateInput);

@@ -38,7 +38,6 @@
   </div>
 </section> 
 <!-- End Search Bar Section -->
-
 <!-- ======= Events Section ======= -->
 <section id="events">
   <div class="container" data-aos="fade-up">
@@ -60,35 +59,23 @@
               <p><strong>Price:</strong> KES {{ $event->price }}</p>
              
               @if($event->installments_enabled)
-    <div class="installment-info">
-        <span class="installment-badge">Installments Available</span>
-        <p class="installment-details">
-            <i class="fas fa-calendar-alt"></i> {{ $event->installment_count }} payments
-            <i class="fas fa-clock ml-2"></i> Every {{ $event->installment_interval }} days
-        </p>
-    </div>
-@endif
-<div class="button-group mt-3">
-    <a href="{{ route('installment.details', ['eventId' => $event->id, 'installmentPlan' => $event->installment_count ?? 1]) }}" class="btn btn-soft-pink rounded-pill shadow-sm me-2 px-4 py-2">
-        <i class="fas fa-calendar-alt me-1"></i> Installments
-    </a>
-    <a href="{{ route('payment', ['eventId' => $event->id]) }}" class="btn btn-soft-peach rounded-pill shadow-sm px-4 py-2">
-        <i class="fas fa-money-bill-wave me-1"></i> Pay Now
-    </a>
-</div>
-
-
-
-
-
-
-
-</a>
-
-
-              <!-- <p><strong>Available Tickets:</strong> {{ $event->available_tickets }}</p> -->
-              <div class="social">
-                <a href="{{ route('pricing') }}" class="btn btn-secondary">Buy Ticket</a>
+                <div class="installment-info">
+                  <span class="installment-badge">Installments Available</span>
+                  <p class="installment-details">
+                      <i class="fas fa-calendar-alt"></i> {{ $event->installment_count }} payments
+                      <i class="fas fa-clock ml-2"></i> Every {{ $event->installment_interval }} days
+                  </p>
+                </div>
+              @endif
+              <div class="button-group mt-3">
+                @if($event->installments_enabled)
+                  <a href="{{ route('installment.details', ['eventId' => $event->id, 'installmentPlan' => $event->installment_count ?? 1]) }}" class="btn btn-soft-pink rounded-pill shadow-sm me-2 px-4 py-2">
+                      <i class="fas fa-calendar-alt me-1"></i> Installments
+                  </a>
+                @endif
+                <a href="{{ route('payment', ['eventId' => $event->id]) }}" class="btn btn-soft-peach rounded-pill shadow-sm px-4 py-2">
+                    <i class="fas fa-money-bill-wave me-1"></i> Pay Now
+                </a>
               </div>
             </div>
           </div>
@@ -98,6 +85,8 @@
   </div>
 </section>
 <!-- End Events Section -->
+
+
 
     <!-- ======= Payment Plans Section ======= -->
     <section id="payment-plans">

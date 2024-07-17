@@ -96,5 +96,8 @@ Route::post('event-organizer/logout', [AuthenticatedSessionController::class, 'd
 
 Route::get('/pricing', [PricingController::class, 'showPricing'])->name('pricing');
 
+
+// Route::post('/pay', [MpesaController::class, 'stk'])->name('pay');
+// Route::get('/payment', [MpesaController::class, 'stk'])->name('payment');
 // Require additional auth routes
 // require __DIR__.'/auth.php';

@@ -21,7 +21,7 @@ class MpesaController extends Controller
 
     public function stk(Request $request)
     {
-        $eventId = $request->event_id;
+        $eventId = $request->input('event_id'); // Ensure correct retrieval
         $mpesa = new Mpesa();
         $phoneNumber = $request->input('mpesa_number');
         $phoneNumber = '254' . substr($phoneNumber, -9);
@@ -32,7 +32,7 @@ class MpesaController extends Controller
 
         \Log::info('Request data: ', $request->all());
 
-        $Amount = '1';
+        $Amount = '750';
         $PartyA = $phoneNumber;
         $PartyB = $BusinessShortCode;
         $CallBackURL = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
@@ -58,18 +58,20 @@ class MpesaController extends Controller
 
         // Save the transaction in the database
         $transaction = Transaction::create([
-            'user_id' => Auth::id(), // Store the user ID
-            'event_id' => $eventId,
+            'user_id' => Auth::id(),
+            'event_id' => $eventId, // Ensure correct saving
             'amount' => $Amount,
             'mpesa_number' => $phoneNumber,
             'status' => 'Pending',
         ]);
-        // Calculate remaining installments and amount
-    $remainingInstallments = 3; // Example value
-    $remainingAmount = 6000; // Example value
 
-    // Send payment received email
-    Mail::to(Auth::user()->email)->send(new PaymentReceived($transaction, $remainingInstallments, $remainingAmount));
-    return redirect()->route('booking.success')->with('success', 'Payment initiated successfully! Please check your M-Pesa for confirmation.');
+        // Calculate remaining installments and amount
+        $remainingInstallments = 1; // Example value
+        $remainingAmount = 750; // Example value
+
+        // Send payment received email
+        Mail::to(Auth::user()->email)->send(new PaymentReceived($transaction, $remainingInstallments, $remainingAmount));
+        
+        return redirect()->route('booking.success')->with('success', 'Payment initiated successfully! Please check your M-Pesa for confirmation.');
     }
 }
