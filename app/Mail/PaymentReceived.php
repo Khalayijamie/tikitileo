@@ -3,10 +3,7 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Transaction;
 
@@ -17,12 +14,14 @@ class PaymentReceived extends Mailable
     public $transaction;
     public $remainingInstallments;
     public $remainingAmount;
+    public $qrCode;
 
-    public function __construct(Transaction $transaction, $remainingInstallments, $remainingAmount)
+    public function __construct(Transaction $transaction, $remainingInstallments, $remainingAmount, $qrCode = null)
     {
         $this->transaction = $transaction;
         $this->remainingInstallments = $remainingInstallments;
         $this->remainingAmount = $remainingAmount;
+        $this->qrCode = $qrCode;
     }
 
     public function build()
@@ -32,14 +31,10 @@ class PaymentReceived extends Mailable
                         'transaction' => $this->transaction,
                         'remainingInstallments' => $this->remainingInstallments,
                         'remainingAmount' => $this->remainingAmount,
+                        'qrCode' => $this->qrCode,
                     ]);
     }
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'Payment Received',
-        );
-    }
+
 
     /**
      * Get the attachments for the message.

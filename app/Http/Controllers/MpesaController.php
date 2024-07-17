@@ -8,9 +8,36 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\PaymentReceived;
 use Illuminate\Support\Facades\Mail;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 
 class MpesaController extends Controller
 {
+    public function completePayment($transactionId)
+    {
+        // Retrieve the transaction
+        $transaction = Transaction::findOrFail($transactionId);
+
+        // Update the transaction status and amount
+        $transaction->status = 'Completed';
+        $transaction->save();
+
+        // Generate a QR code
+        $qrCode = new QrCode(route('view.ticket', ['transactionId' => $transactionId]));
+        $writer = new PngWriter();
+        $qrCodeDataUri = $writer->write($qrCode)->getDataUri();
+
+        // Send email with QR code
+        Mail::to(Auth::user()->email)->send(new PaymentReceived($transaction, 0, 0, $qrCodeDataUri));
+
+        return redirect()->route('booking.success')->with('success', 'Payment completed successfully! Check your email for the ticket.');
+    }
+    public function viewTicket($transactionId)
+    {
+        $transaction = Transaction::findOrFail($transactionId);
+        return view('ticket.view', compact('transaction'));
+    }
+
     private function validateAmount($amount)
     {
         if (!is_numeric($amount) || $amount <= 0 || $amount > 70000) {
