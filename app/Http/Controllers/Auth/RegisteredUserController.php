@@ -1,5 +1,7 @@
 <?php
 
+// app/Http/Controllers/Auth/RegisteredUserController.php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -32,19 +34,26 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $role = $request->has('is_event_organizer') && $request->is_event_organizer == 'on' ? 'event_organizer' : 'user';
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $role,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
+
+        if ($user->role === 'event_organizer') {
+            return redirect()->route('event-organizer.dashboard');
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }

@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -21,6 +23,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'address',
+        'avatar',
+        'role',
     ];
 
     /**
@@ -42,4 +48,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getProfilePhotoUrlAttribute()
+    {
+    return $this->avatar ? asset('assets/img/' . $this->avatar) : asset('assets/img/avatar.png');
+}
+
+public function events()
+{
+    return $this->hasMany(Event::class, 'organizer_id');
+}
+public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function wishlist()
+    {
+        return $this->belongsToMany(Event::class, 'wishlists', 'user_id', 'event_id');
+    }
 }
